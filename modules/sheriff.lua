@@ -1,11 +1,8 @@
 -- Sheriff Aim Module
 local SheriffAim = {}
 
-local Config = require(script.Parent.Parent.config.settings)
-
 -- Initialize sheriff aim
 function SheriffAim:Init(SheriffSection)
-    -- Silent aim toggle
     getgenv().SheriffAim = false
     SheriffSection:CreateToggle({
         Title = "Silent aim",
@@ -14,16 +11,15 @@ function SheriffAim:Init(SheriffSection)
             getgenv().SheriffAim = state
         end
     })
-    
-    -- Accuracy slider
-    getgenv().GunAccuracy = Config.SheriffAim.DefaultAccuracy
+
+    getgenv().GunAccuracy = 25
     SheriffSection:CreateSlider({
         Title = "Accuracy",
-        Min = Config.SheriffAim.MinAccuracy,
-        Max = Config.SheriffAim.MaxAccuracy,
-        Default = Config.SheriffAim.DefaultAccuracy,
+        Min = 0,
+        Max = 100,
+        Default = 25,
         Callback = function(val)
-            getgenv().GunAccuracy = tonumber(val) or Config.SheriffAim.DefaultAccuracy
+            getgenv().GunAccuracy = tonumber(val) or 25
         end
     })
 end
